@@ -7,8 +7,8 @@
     { name: 'Kitchen Ware', x: 115, y: 130, width: 145, height: 60, color: '#86efac', textX: 150, textY: 150 },
     { name: 'Grocery', x: 112, y: 208, width: 145, height: 110, color: '#86efac', textX: 160, textY: 255 },
     { name: 'Vegetables & Fruits', x: 10, y: 335, width: 250, height: 65, color: '#86efac', textX: 70, textY: 370 },
-    { name: 'Carts', x: 15, y: 432, width: 50, height: 95, color: '#00bbf9', textX: 28, textY: 505, rotation: 270 },
-    { name: 'Entrance', x: 110, y: 480, color: '', textX: 95, textY: 505, fontSize: 30 },
+    { name: 'Carts', x: 15, y: 415, width: 50, height: 95, color: '#00bbf9', textX: 28, textY: 485, rotation: 270 },
+    { name: 'Entrance', x: 110, y: 480, color: '', textX: 95, textY: 475, fontSize: 30 },
     // second Layer
     { name: 'Infants\nSection', x: 305, y: 1, width: 170, height: 110, color: '#00bbf9', textX: 370, textY: 45 },
     { name: 'Shoes', x: 490, y: 1, width: 170, height: 110, color: '#00bbf9', textX: 555, textY: 50 },
@@ -32,11 +32,11 @@
     { name: 'Snacks1', x: 320, y: 385, width: 160, height: 30, color: '#00bbf9', textX: 370, textY: 395 },
     { name: 'Snacks2', x: 495, y: 385, width: 160, height: 30, color: '#00bbf9', textX: 540, textY: 395 },
     { name: 'Snacks3', x: 672, y: 385, width: 160, height: 30, color: '#00bbf9', textX: 710, textY: 395 },
-    { name: 'Cosmetics', x: 305, y: 465, width: 128, height: 62, color: '#00bbf9', textX: 330, textY: 490 },
-    { name: 'Food Court', x: 449, y: 465, width: 112, height: 62, color: '#00bbf9', textX: 470, textY: 490 },
-    { name: 'WB\nGENTS', x: 575, y: 480, width: 50, height: 50, color: '#ffba08', textX: 580, textY: 490, fontSize: 12 },
-    { name: 'WB\nLADIES', x: 630, y: 480, width: 50, height: 50, color: '#ffba08', textX: 634, textY: 490, fontSize: 12 },
-    { name: 'Customer\nService', x: 690, y: 465, width: 125, height: 62, color: '#00bbf9', textX: 715, textY: 480 },
+    { name: 'Cosmetics', x: 305, y: 485, width: 128, height: 62, color: '#00bbf9', textX: 330, textY: 510 },
+    { name: 'Food Court', x: 449, y: 485, width: 112, height: 62, color: '#00bbf9', textX: 470, textY: 510 },
+    { name: 'WB\nGENTS', x: 575, y: 490, width: 50, height: 50, color: '#ffba08', textX: 580, textY: 505, fontSize: 12 },
+    { name: 'WB\nLADIES', x: 630, y: 490, width: 50, height: 50, color: '#ffba08', textX: 634, textY: 505, fontSize: 12 },
+    { name: 'Customer\nService', x: 690, y: 485, width: 125, height: 62, color: '#00bbf9', textX: 715, textY: 505 },
 
     // third Layer
 

@@ -2,51 +2,146 @@ import React from 'react';
 import { Stage, Layer, Rect, Text, Circle, Line } from 'react-konva';
 import { locators } from '../jsonfiles/locators';
 import { sections } from '../jsonfiles/sections';
+import { axile } from '../jsonfiles/axile';
 import { useRoute } from '../context/RouteContext';
-import { findPath } from './Pathfinding'; // <-- A* logic
-import { gridMatrix, CELL_SIZE } from '../jsonfiles/aisleGrid';
+
 
 const StoreMap = () => {
   const { selectedSection } = useRoute();
 
-  const routeCoords = selectedSection
-    .map(name => locators.find(loc => loc.name === name))
-    .filter(Boolean);
+  // function getPathSegmentsBetweenSections(sectionFrom, sectionTo, axile, locators) {
+  //   const fromLocator = locators.find(p => p.name === sectionFrom);
+  //   const toLocator = locators.find(p => p.name === sectionTo);
+  //   if (!fromLocator || !toLocator) return [];
 
-  let finalRoute = [];
-  for (let i = 0; i < routeCoords.length - 1; i++) {
-    const from = routeCoords[i];
-    const to = routeCoords[i + 1];
+  //   const startAxiles = axile.filter(a => a.next.includes(sectionFrom));
+  //   const targetAxiles = axile.filter(a => a.next.includes(sectionTo));
 
-    console.log(`Finding path from ${from.name || i} to ${to.name || i + 1}`, from, to);
+  //   const queue = [];
+  //   const parent = {};
 
-    try {
-      const segment = findPath(from, to);
-      if (segment.length > 0) {
-        finalRoute.push(...segment);
-      } else {
-        console.warn('No path found between:', from, 'and', to);
+  //   startAxiles.forEach(ax => queue.push({ axile: ax, path: [ax.name] }));
+
+  //   let finalPath = [];
+
+  //   while (queue.length > 0) {
+  //     const { axile: current, path: currentPath } = queue.shift();
+
+  //     // If current axile connects to the target section
+  //     if (targetAxiles.some(t => t.name === current.name)) {
+  //       finalPath = currentPath;
+  //       break;
+  //     }
+
+  //     for (let nextName of current.next) {
+  //       const nextAxile = axile.find(a => a.name === nextName);
+
+  //       // Only avoid cycles in current path
+  //       if (nextAxile && !currentPath.includes(nextAxile.name)) {
+  //         queue.push({
+  //           axile: nextAxile,
+  //           path: [...currentPath, nextAxile.name],
+  //         });
+  //         parent[nextAxile.name] = current.name;
+  //       }
+  //     }
+  //   }
+
+  //   if (!finalPath.length) return [];
+
+  //   // Reconstruct full path from axile names
+  //   const axilePath = finalPath.map(name => axile.find(a => a.name === name)).filter(Boolean);
+
+  //   const fullPath = [[fromLocator.x, fromLocator.y]];
+  //   axilePath.forEach(a => fullPath.push([a.x, a.y]));
+  //   fullPath.push([toLocator.x, toLocator.y]);
+
+  //   const segments = [];
+  //   for (let i = 0; i < fullPath.length - 1; i++) {
+  //     segments.push({ points: [...fullPath[i], ...fullPath[i + 1]] });
+  //   }
+
+  //   return segments;
+  // }
+
+  function getPathSegmentsBetweenSections(sectionFrom, sectionTo, axile, locators) {
+    const fromLocator = locators.find(p => p.name === sectionFrom);
+    const toLocator = locators.find(p => p.name === sectionTo);
+    if (!fromLocator || !toLocator) return [];
+
+    // ✅ Check if sections are close enough to connect directly
+    // const dx = Math.abs(fromLocator.x - toLocator.x);
+    // const dy = Math.abs(fromLocator.y - toLocator.y);
+    // const distanceThreshold = 50; // Adjust as needed
+
+    // if (dx <= distanceThreshold && dy <= distanceThreshold) {
+    //   return [{
+    //     points: [fromLocator.x, fromLocator.y, toLocator.x, toLocator.y]
+    //   }];
+    // }
+
+    const startAxiles = axile.filter(a => a.next.includes(sectionFrom));
+    const targetAxiles = axile.filter(a => a.next.includes(sectionTo));
+
+    const queue = [];
+    const visited = new Set();
+
+    startAxiles.forEach(ax => queue.push({ axile: ax, path: [ax.name] }));
+
+    while (queue.length > 0) {
+      const { axile: current, path: currentPath } = queue.shift();
+
+      if (targetAxiles.some(t => t.name === current.name)) {
+        const axilePath = currentPath.map(name => axile.find(a => a.name === name)).filter(Boolean);
+
+        const fullPath = [[fromLocator.x, fromLocator.y]];
+        axilePath.forEach(a => fullPath.push([a.x, a.y]));
+        fullPath.push([toLocator.x, toLocator.y]);
+
+        const segments = [];
+        for (let i = 0; i < fullPath.length - 1; i++) {
+          segments.push({ points: [...fullPath[i], ...fullPath[i + 1]] });
+        }
+
+        return segments;
       }
-    } catch (err) {
-      console.error('Error finding path:', err);
+
+      for (let nextName of current.next) {
+        const nextAxile = axile.find(a => a.name === nextName);
+
+        if (nextAxile && !currentPath.includes(nextAxile.name)) {
+          queue.push({
+            axile: nextAxile,
+            path: [...currentPath, nextAxile.name],
+          });
+          visited.add(nextAxile.name);
+        }
+      }
     }
+
+    return [];
   }
 
 
-  const linePoints = finalRoute.flatMap(p => [p.x, p.y]);
+  const buildAllRouteSegments = () => {
+    const allSegments = [];
 
-  const cols = Math.floor(1195 / CELL_SIZE);
-  const rows = Math.floor(550 / CELL_SIZE);
+    for (let i = 0; i < selectedSection.length - 1; i++) {
+      const from = selectedSection[i];
+      const to = selectedSection[i + 1];
 
-  routeCoords.forEach(({ name, x, y }) => {
-    const gx = Math.floor(x / CELL_SIZE);
-    const gy = Math.floor(y / CELL_SIZE);
-    console.log(`📍 ${name} locator at grid: (${gx}, ${gy}) value:`, gridMatrix[gy]?.[gx]);
-  });
+      const segs = getPathSegmentsBetweenSections(from, to, axile, locators);
+      allSegments.push(...segs);
+    }
+
+    return allSegments;
+  };
+
+  const pathSegments = buildAllRouteSegments();
 
   return (
-    <div className='w-[80%] border-2 h-full rounded-2xl p-1 bg-gray-100'>
-      <Stage width={1300} height={1000}>
+    <div className='w-[85%] border-2 h-full rounded-2xl p-1 bg-gray-100'>
+      <Stage width={1190} height={540}>
 
         <Layer>
           {sections.map((sec, i) => (
@@ -74,62 +169,28 @@ const StoreMap = () => {
         </Layer>
 
         <Layer>
-          {/* 🔴 Locator Points */}
           {locators.map((p, i) => (
             <Circle key={i} x={p.x} y={p.y} radius={3} fill="red" />
           ))}
 
-          {linePoints.length >= 4 && (
-            <Line
-              points={linePoints}
-              stroke='blue'
-              strokeWidth={4}
-              tension={0.2}
-              lineCap='round'
-            />
-          )}
+          {axile.map((p, i) => (
+            <Circle key={i} x={p.x} y={p.y} radius={3} fill="blue" />
+          ))}
+        </Layer>
 
-          {routeCoords.map((p, i) => (
-            <Text
+        <Layer>
+          {pathSegments.map((seg, i) => (
+            <Line
               key={i}
-              text={`${i + 1}`}
-              x={p.x + 5}
-              y={p.y - 10}
-              fontSize={14}
-              fill="black"
+              points={seg.points}
+              stroke="black"
+              strokeWidth={2}
+              lineCap="round"
+              lineJoin="round"
             />
           ))}
-
-
-
-          {gridMatrix.map((row, y) =>
-            row.map((cell, x) =>
-              cell === 1 ? (
-                <Circle
-                  key={`${x}-${y}`}
-                  x={x * CELL_SIZE + CELL_SIZE / 2}
-                  y={y * CELL_SIZE + CELL_SIZE / 2}
-                  radius={2}
-                  fill='gray'
-                />
-              ) : null
-            )
-          )}
-
-          {Array.from({ length: rows }).map((_, rowIndex) =>
-            Array.from({ length: cols }).map((_, colIndex) => (
-              <Rect
-                key={`${rowIndex}-${colIndex}`}
-                x={colIndex * CELL_SIZE}
-                y={rowIndex * CELL_SIZE}
-                width={CELL_SIZE}
-                height={CELL_SIZE}
-                stroke="black"
-                strokeWidth={0.5}
-              />
-            ))
-          )}
         </Layer>
+
       </Stage>
     </div>
   );
