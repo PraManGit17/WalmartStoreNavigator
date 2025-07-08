@@ -163,8 +163,72 @@
 
 // export default StoreMap
 
+
+{/* <Layer>
+          <Circle x={130} y={42} radius={3} fill='red' name='Diary' />
+          <Circle x={130} y={116} radius={3} fill='red' name='Frozen Food' />
+          <Circle x={107} y={250} radius={3} fill='red' name='Meat' />
+          <Circle x={107} y={420} radius={3} fill='red' name='Vegetables & Fruits' />
+          <Circle x={185} y={193} radius={3} fill='red' name='Kitchen Ware' />
+          <Circle x={185} y={332} radius={3} fill='red' name='Grocery' />
+          <Circle x={155} y={490} radius={3} fill='red' name='Entrance' />
+          <Circle x={65} y={485} radius={3} fill='red' name='Carts' />
+        </Layer>
+
+
+        <Layer>
+          <Circle x={390} y={120} radius={3} fill='red' name='InfantsSection' />
+          <Circle x={575} y={120} radius={3} fill='red' name='Shoes' />
+          <Circle x={765} y={120} radius={3} fill='red' name='Electronics' />
+
+          <Circle x={345} y={202} radius={3} fill='red' name='BoysWear' />
+          <Circle x={435} y={202} radius={3} fill='red' name='GirlsWear' />
+          <Circle x={390} y={202} radius={3} fill='red' name='Fitting Room' />
+
+          <Circle x={375} y={290} radius={3} fill='red' name='MensWear-ChangingRoom' />
+          <Circle x={405} y={290} radius={3} fill='red' name='WomensWear-ChangingRoom' />
+
+          <Circle x={400} y={370} radius={3} fill='red' name='Snacks1' />
+          <Circle x={575} y={370} radius={3} fill='red' name='Snacks2' />
+          <Circle x={740} y={370} radius={3} fill='red' name='Snacks3' />
+
+
+          <Circle x={575} y={300} radius={3} fill='red' name='SeasonalAccessories-Stationery' />
+          <Circle x={530} y={245} radius={3} fill='red' name='HouseholdAccessories-SeasonalAccessories' />
+          <Circle x={575} y={190} radius={3} fill='red' name='HouseholdAccessories-LuggageAccessories' />
+          <Circle x={615} y={245} radius={3} fill='red' name='Stationery-LuggageAccessories' />
+
+          <Circle x={675} y={205} radius={3} fill='red' name='Furniture' />
+          <Circle x={675} y={285} radius={3} fill='red' name='Crafts-Fabrics' />
+
+          <Circle x={365} y={450} radius={3} fill='red' name='Cosmetics' />
+          <Circle x={505} y={450} radius={3} fill='red' name='Food Court' />
+          <Circle x={745} y={450} radius={3} fill='red' name='CustomerService' />
+
+          <Circle x={600} y={465} radius={3} fill='red' name='WBGENTS-DOWN' />
+          <Circle x={655} y={465} radius={3} fill='red' name='WBLADIES-DOWN' />
+
+        </Layer>
+
+
+        <Layer>
+          <Circle x={880} y={70} radius={3} fill='red' name='WBGENTS-UP' />
+          <Circle x={935} y={70} radius={3} fill='red' name='WBLADIES-UP' />
+          <Circle x={1005} y={120} radius={3} fill='red' name='Paint' />
+          <Circle x={1070} y={120} radius={3} fill='red' name='Tools&Hardware' />
+          <Circle x={1145} y={120} radius={3} fill='red' name='Automotive' />
+          <Circle x={870} y={200} radius={3} fill='red' name='Sweets' />
+          <Circle x={870} y={325} radius={3} fill='red' name='Cutlinary' />
+
+          <Circle x={990} y={175} radius={3} fill='red' name='Sweets' />
+          <Circle x={990} y={270} radius={3} fill='red' name='Cutlinary' />
+          <Circle x={1060} y={390} radius={3} fill='red' name='Cutlinary' />
+
+        </Layer> */}
+
+
 import React from 'react';
-import { Stage, Layer, Rect, Text } from 'react-konva';
+import { Stage, Layer, Rect, Text, Circle } from 'react-konva';
 
 const StoreMap = () => {
 
@@ -172,18 +236,18 @@ const StoreMap = () => {
 
     // first Layer
 
-    { name: 'Diary', x: 10, y: 5, width: 270, height: 30, color: '#86efac', textX: 125, textY: 15 },
-    { name: 'Frozen Food', x: 10, y: 50, width: 250, height: 60, color: '#86efac', textX: 100, textY: 65 },
+    { name: 'Diary', x: 10, y: 5, width: 270, height: 30, color: '#86efac', textX: 120, textY: 15 },
+    { name: 'Frozen Food', x: 10, y: 50, width: 250, height: 60, color: '#86efac', textX: 90, textY: 75 },
     { name: 'Meat', x: 10, y: 125, width: 90, height: 200, color: '#86efac', textX: 40, textY: 205 },
     { name: 'Kitchen Ware', x: 115, y: 125, width: 145, height: 60, color: '#86efac', textX: 150, textY: 150 },
-    { name: 'Grocery', x: 115, y: 200, width: 145, height: 125, color: '#86efac', textX: 150, textY: 255 },
+    { name: 'Grocery', x: 115, y: 200, width: 145, height: 125, color: '#86efac', textX: 160, textY: 255 },
     { name: 'Vegetables & Fruits', x: 10, y: 340, width: 250, height: 70, color: '#86efac', textX: 70, textY: 370 },
-    { name: 'Carts', x: 10, y: 420, width: 50, height: 100, color: '#00bbf9', textX: 25, textY: 490, rotation: 270 },
-    { name: 'Entrance', x: 110, y: 480, color: '', textX: 80, textY: 490, fontSize: 30 },
+    { name: 'Carts', x: 10, y: 435, width: 50, height: 100, color: '#00bbf9', textX: 28, textY: 505, rotation: 270 },
+    { name: 'Entrance', x: 110, y: 480, color: '', textX: 95, textY: 505, fontSize: 30 },
 
     // second Layer
 
-    { name: 'Infants\nSection', x: 305, y: 5, width: 170, height: 105, color: '#00bbf9', textX: 400, textY: 50 },
+    { name: 'Infants\nSection', x: 305, y: 5, width: 170, height: 105, color: '#00bbf9', textX: 370, textY: 45 },
     { name: 'Shoes', x: 490, y: 5, width: 170, height: 105, color: '#00bbf9', textX: 555, textY: 50 },
     { name: 'Electronics', x: 675, y: 5, width: 170, height: 105, color: '#00bbf9', textX: 730, textY: 50 },
     { name: 'Boys Wear', x: 305, y: 140, width: 80, height: 60, color: '#00bbf9', textX: 315, textY: 165, fontSize: 11 },
@@ -207,7 +271,7 @@ const StoreMap = () => {
     { name: 'WB\nLADIES', x: 630, y: 475, width: 50, height: 55, color: '#ffba08', textX: 634, textY: 490, fontSize: 12 },
     { name: 'Customer\nService', x: 685, y: 460, width: 130, height: 70, color: '#00bbf9', textX: 715, textY: 480 },
 
-   // third Layer
+    // third Layer
 
     {
       name: 'WB\nGENTS',
@@ -267,7 +331,7 @@ const StoreMap = () => {
       fontSize: 15,
     },
     {
-      name: 'Tools &\nHARDWARE',
+      name: 'Tools&\nHardware',
       x: 1040,
       y: 5,
       width: 65,
@@ -275,7 +339,7 @@ const StoreMap = () => {
       color: '#00bbf9',
       textX: 1048,
       textY: 50,
-      fontSize: 12,
+      fontSize: 11,
     },
     {
       name: 'Automotive',
@@ -286,7 +350,7 @@ const StoreMap = () => {
       color: '#00bbf9',
       textX: 1112,
       textY: 55,
-      fontSize: 12,
+      fontSize: 11,
     },
     {
       name: 'Sports Gear',
@@ -323,6 +387,53 @@ const StoreMap = () => {
     },
   ];
 
+  const locators = [
+    // Layer 1
+    { name: 'Diary', x: 130, y: 42 },
+    { name: 'Frozen Food', x: 130, y: 116 },
+    { name: 'Meat', x: 107, y: 250 },
+    { name: 'Vegetables & Fruits', x: 107, y: 420 },
+    { name: 'Kitchen Ware', x: 185, y: 193 },
+    { name: 'Grocery', x: 185, y: 332 },
+    { name: 'Entrance', x: 155, y: 490 },
+    { name: 'Carts', x: 65, y: 485 },
+
+    // Layer 2
+    { name: 'InfantsSection', x: 390, y: 120 },
+    { name: 'Shoes', x: 575, y: 120 },
+    { name: 'Electronics', x: 765, y: 120 },
+    { name: 'BoysWear', x: 345, y: 202 },
+    { name: 'GirlsWear', x: 435, y: 202 },
+    { name: 'Fitting Room', x: 390, y: 202 },
+    { name: 'MensWear-ChangingRoom', x: 375, y: 290 },
+    { name: 'WomensWear-ChangingRoom', x: 405, y: 290 },
+    { name: 'Snacks1', x: 400, y: 370 },
+    { name: 'Snacks2', x: 575, y: 370 },
+    { name: 'Snacks3', x: 740, y: 370 },
+    { name: 'SeasonalAccessories-Stationery', x: 575, y: 300 },
+    { name: 'HouseholdAccessories-SeasonalAccessories', x: 530, y: 245 },
+    { name: 'HouseholdAccessories-LuggageAccessories', x: 575, y: 190 },
+    { name: 'Stationery-LuggageAccessories', x: 615, y: 245 },
+    { name: 'Furniture', x: 675, y: 205 },
+    { name: 'Crafts-Fabrics', x: 675, y: 285 },
+    { name: 'Cosmetics', x: 365, y: 450 },
+    { name: 'Food Court', x: 505, y: 450 },
+    { name: 'CustomerService', x: 745, y: 450 },
+    { name: 'WBGENTS-DOWN', x: 600, y: 465 },
+    { name: 'WBLADIES-DOWN', x: 655, y: 465 },
+
+    // Layer 3
+    { name: 'WBGENTS-UP', x: 880, y: 70 },
+    { name: 'WBLADIES-UP', x: 935, y: 70 },
+    { name: 'Paint', x: 1005, y: 120 },
+    { name: 'Tools&Hardware', x: 1070, y: 120 },
+    { name: 'Automotive', x: 1145, y: 120 },
+    { name: 'Sweets', x: 990, y: 175 },
+    { name: 'Cutlinary', x: 990, y: 270 },
+    { name: 'Garden', x: 1060, y: 390 },
+  ];
+
+
 
 
   return (
@@ -352,6 +463,13 @@ const StoreMap = () => {
             </React.Fragment>
           ))}
         </Layer>
+
+        <Layer>
+          {locators.map((point, i) => (
+            <Circle key={i} x={point.x} y={point.y} radius={3} fill="red" name={point.name} />
+          ))}
+        </Layer>
+
 
       </Stage>
     </div>
